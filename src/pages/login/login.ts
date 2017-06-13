@@ -38,4 +38,8 @@ export class LoginPage {
     this.navCtrl.push('SignupPage');
   }
 
+  passwordreset() {
+    this.navCtrl.push('PasswordresetPage');
+  }
+
 }
