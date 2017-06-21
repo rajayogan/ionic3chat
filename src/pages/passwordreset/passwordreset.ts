@@ -31,9 +31,9 @@ export class PasswordresetPage {
         alert.setTitle('Email Sent');
         alert.setSubTitle('Please follow the instructions in the email to reset your password');
       }
-      else {
-        alert.setTitle('Failed');
-      }
+    }).catch((err) => {
+      alert.setTitle('Failed');
+      alert.setSubTitle(err);
     })
   }
 
