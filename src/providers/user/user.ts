@@ -12,12 +12,11 @@ import firebase from 'firebase';
 export class UserProvider {
   firedata = firebase.database().ref('/users');
   constructor(public afireauth: AngularFireAuth) {
+   
   }
 
   /*
-
   Adds a new user to the system.
-
   Called from - signup.ts
   Inputs - The new user object containing the email, password and displayName.
   Outputs - Promise.
@@ -51,7 +50,6 @@ export class UserProvider {
   }
 
   /*
-
   For resetting the password of the user.
   Called from - passwordreset.ts
   Inputs - email of the user.
@@ -74,7 +72,6 @@ export class UserProvider {
   
   For updating the users collection and the firebase users list with
   the imageurl of the profile picture stored in firebase storage.
-
   Called from - profilepic.ts
   Inputs - Url of the image stored in firebase.
   OUtputs - Promise.
@@ -135,5 +132,22 @@ export class UserProvider {
     })
     return promise;
   }
+
+  getallusers() {
+    var promise = new Promise((resolve, reject) => {
+      this.firedata.orderByChild('uid').once('value', (snapshot) => {
+        let userdata = snapshot.val();
+        let temparr = [];
+        for (var key in userdata) {
+          temparr.push(userdata[key]);
+        }
+        resolve(temparr);
+      }).catch((err) => {
+        reject(err);
+      })
+    })
+    return promise;
+  }
+
 
 }

@@ -21,4 +21,8 @@ export class ChatsPage {
     console.log('ionViewDidLoad ChatsPage');
   }
 
+  addbuddy() {
+    this.navCtrl.push('BuddiesPage');
+  }
+
 }
