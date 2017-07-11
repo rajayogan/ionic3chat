@@ -16,6 +16,7 @@ import { MyApp } from './app.component';
 import { AuthProvider } from '../providers/auth/auth';
 import { UserProvider } from '../providers/user/user';
 import { ImghandlerProvider } from '../providers/imghandler/imghandler';
+import { RequestsProvider } from '../providers/requests/requests';
 
 
 @NgModule({
@@ -42,7 +43,8 @@ import { ImghandlerProvider } from '../providers/imghandler/imghandler';
     AngularFireAuth,
     UserProvider,
     ImghandlerProvider,
-    UserProvider
+    UserProvider,
+    RequestsProvider
   ]
 })
 export class AppModule {}
