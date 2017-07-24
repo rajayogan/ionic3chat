@@ -41,5 +41,14 @@
       </button>
     </ion-item-options>
   </ion-item-sliding>
+  <ion-list-header>
+    Friends
+  </ion-list-header>
+  <ion-item *ngFor="let item of myfriends" (click)="buddychat(item)">
+    <ion-avatar item-left>
+      <img src={{item.photoURL}}>
+    </ion-avatar>
+    <h3>{{item.displayName}}</h3>
+  </ion-item>
 </ion-list>
 </ion-content>
