@@ -1,0 +1,45 @@
+<!--
+  Generated template for the BuddychatPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar color="hcolor">
+    <ion-title>{{buddy.displayName}}</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content #content>
+<div class = "chatwindow">
+  <ion-list no-lines>
+    <ion-item *ngFor = "let item of allmessages; let i = index" text-wrap>
+      <ion-avatar item-left *ngIf="item.sentby === buddy.uid">
+        <img src="{{buddy.photoURL}}">
+      </ion-avatar>
+      <div class="bubble me" *ngIf="item.sentby === buddy.uid">
+        <h3>{{item.message}}</h3>
+      </div>
+      <ion-avatar item-right *ngIf="item.sentby != buddy.uid">
+        <img src="{{photoURL}}">
+      </ion-avatar>
+      <div class="bubble you" *ngIf="item.sentby != buddy.uid">
+        <h3>{{item.message}}</h3>
+      </div>
+    </ion-item>
+  </ion-list>
+</div>
+</ion-content>
+<ion-footer ion-fixed>    
+  <ion-toolbar class="no-border" color="white">        
+    <ion-input [(ngModel)]="newmessage" placeholder="Write your message ..."></ion-input>  
+    <ion-buttons end>
+      <button ion-button (click)="addmessage()">
+        <ion-icon name="send" color="primary"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-toolbar>    
+</ion-footer>
