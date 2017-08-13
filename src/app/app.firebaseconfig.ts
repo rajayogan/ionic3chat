@@ -1,5 +1,5 @@
 export var config = {
-    apiKey: <apiKey>,
+        apiKey: <apiKey>,
     authDomain: <yourauthDomain>,
     databaseURL: <yourdatabaseURL>,
     projectId: <yourprojectId>,

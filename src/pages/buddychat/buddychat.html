@@ -8,6 +8,11 @@
 
   <ion-navbar color="hcolor">
     <ion-title>{{buddy.displayName}}</ion-title>
+    <ion-buttons end>
+      <button ion-button (click)="sendPicMsg()">
+      <ion-icon name="camera"></ion-icon>
+      </button>
+    </ion-buttons>
   </ion-navbar>
 
 </ion-header>
@@ -21,13 +26,15 @@
         <img src="{{buddy.photoURL}}">
       </ion-avatar>
       <div class="bubble me" *ngIf="item.sentby === buddy.uid">
-        <h3>{{item.message}}</h3>
+        <h3 *ngIf="!imgornot[i]">{{item.message}}</h3>
+        <img src="{{item.message}}" *ngIf="imgornot[i]">
       </div>
       <ion-avatar item-right *ngIf="item.sentby != buddy.uid">
         <img src="{{photoURL}}">
       </ion-avatar>
       <div class="bubble you" *ngIf="item.sentby != buddy.uid">
-        <h3>{{item.message}}</h3>
+        <h3 *ngIf="!imgornot[i]">{{item.message}}</h3>
+        <img src="{{item.message}}" *ngIf="imgornot[i]">
       </div>
     </ion-item>
   </ion-list>
