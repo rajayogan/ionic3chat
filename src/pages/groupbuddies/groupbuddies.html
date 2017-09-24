@@ -6,13 +6,31 @@
 -->
 <ion-header>
 
-  <ion-navbar>
-    <ion-title>groupbuddies</ion-title>
+  <ion-navbar color="hcolor">
+    <ion-title>Group Buddies</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
-<ion-content padding>
-
+<ion-content>
+  <ion-searchbar [(ngModel)]="searchstring" (input)="searchuser($event)"
+                  placeholder="Search">
+  </ion-searchbar>
+<ion-list no-lines>
+  <ion-item-sliding *ngFor="let key of myfriends">
+    <ion-item>
+      <ion-avatar item-left>
+        <img src="{{key.photoURL}}">
+      </ion-avatar>
+      <h2>{{key.displayName}}</h2>
+    </ion-item>
+    <ion-item-options slide="left">
+      <button ion-button color="primary" (click)="addbuddy(key)">
+        <ion-icon name="person-add"></ion-icon>
+        Add
+      </button>
+    </ion-item-options>
+  </ion-item-sliding>
+</ion-list>
 </ion-content>
