@@ -6,13 +6,25 @@
 -->
 <ion-header>
 
-  <ion-navbar>
-    <ion-title>groupinfo</ion-title>
+  <ion-navbar color="hcolor">
+    <ion-title>Group Info</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
-<ion-content padding>
+<ion-content>
+  <ion-list no-lines>
+    <ion-list-header>
+      Group Members
+    </ion-list-header>
+    <ion-item *ngFor="let item of groupmembers">
+      <ion-avatar item-left>
+        <img src="{{item.photoURL}}">
+      </ion-avatar>
+      <h2>{{item.displayName}}</h2>
+      <p>Member</p>
+    </ion-item>
+  </ion-list>
 
 </ion-content>

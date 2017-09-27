@@ -110,4 +110,28 @@ export class GroupsProvider {
     })
   }
 
+  deletemember(member) {           
+    this.firegroup.child(firebase.auth().currentUser.uid).child(this.currentgroupname)
+      .child('members').orderByChild('uid').equalTo(member.uid).once('value', (snapshot) => {
+        snapshot.ref.remove().then(() => {
+          this.firegroup.child(member.uid).child(this.currentgroupname).remove().then(() => {
+            this.getintogroup(this.currentgroupname);
+          })
+        })
+      })
+  }
+
+  getgroupmembers() {
+    this.firegroup.child(firebase.auth().currentUser.uid).child(this.currentgroupname).once('value', (snapshot) => {
+      var tempdata = snapshot.val().owner;
+      this.firegroup.child(tempdata).child(this.currentgroupname).child('members').once('value', (snapshot) => {
+        var tempvar = snapshot.val();
+        for (var key in tempvar) {
+          this.currentgroup.push(tempvar[key]);
+        }
+      })
+    })
+    this.events.publish('gotmembers');
+  }
+
 }
