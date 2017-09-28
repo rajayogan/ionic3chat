@@ -134,4 +134,43 @@ export class GroupsProvider {
     this.events.publish('gotmembers');
   }
 
+  leavegroup() {
+    return new Promise((resolve, reject) => {
+      this.firegroup.child(firebase.auth().currentUser.uid).child(this.currentgroupname).once('value', (snapshot) => {
+      var tempowner = snapshot.val().owner;
+      this.firegroup.child(tempowner).child(this.currentgroupname).child('members').orderByChild('uid')
+        .equalTo(firebase.auth().currentUser.uid).once('value', (snapshot) => {
+          snapshot.ref.remove().then(() => {
+            this.firegroup.child(firebase.auth().currentUser.uid).child(this.currentgroupname).remove().then(() => {
+              resolve(true);
+            }).catch((err) => {
+              reject(err);
+            })
+          }).catch((err) => {
+            reject(err);
+          })
+      })
+    })
+    }) 
+  }
+
+  deletegroup() {
+    return new Promise((resolve, reject) => {
+      this.firegroup.child(firebase.auth().currentUser.uid).child(this.currentgroupname).child('members').once('value', (snapshot) => {
+        var tempmembers = snapshot.val();
+  
+        for (var key in tempmembers) {
+          this.firegroup.child(tempmembers[key].uid).child(this.currentgroupname).remove();
+        }
+
+        this.firegroup.child(firebase.auth().currentUser.uid).child(this.currentgroupname).remove().then(() => {
+          resolve(true);
+        }).catch((err) => {
+          reject(err);
+        })
+        
+      })
+    })
+  }
+
 }
