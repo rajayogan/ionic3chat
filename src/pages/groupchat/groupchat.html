@@ -9,6 +9,9 @@
   <ion-navbar color="hcolor">
     <ion-title>{{groupName}}</ion-title>
     <ion-buttons end>
+      <button ion-button (click)="sendpicmsg()">
+        <ion-icon name="camera"></ion-icon>
+      </button>
       <button *ngIf="owner" ion-button icon-only (click)="presentOwnerSheet()">
         <ion-icon name="menu"></ion-icon>
       </button>
@@ -21,6 +24,39 @@
 </ion-header>
 
 
-<ion-content padding>
-
+<ion-content #content>
+<div class = "chatwindow">
+  <ion-list no-lines>
+    <ion-item *ngFor = "let item of allgroupmsgs; let i = index" text-wrap>
+      <ion-avatar item-left *ngIf="item.sentby === alignuid">
+        <img src="{{photoURL}}">
+      </ion-avatar>
+      <div class="bubble me" *ngIf="item.sentby === alignuid">
+        <h6 style="color: mediumpurple;">{{item.displayName}}</h6>
+        <h3 *ngIf="!imgornot[i]">{{item.message}}</h3>
+        <img src="{{item.message}}" *ngIf="imgornot[i]">
+        <p><small>{{item.timestamp}}</small></p>
+      </div>
+      <ion-avatar item-right *ngIf="item.sentby != alignuid">
+        <img src="{{item.photoURL}}">
+      </ion-avatar>
+      <div class="bubble you" *ngIf="item.sentby != alignuid">
+        <h6 style="color: mediumvioletred;">{{item.displayName}}</h6>
+        <h3 *ngIf="!imgornot[i]">{{item.message}}</h3>
+        <img src="{{item.message}}" *ngIf="imgornot[i]">
+        <p><small>{{item.timestamp}}</small></p>
+      </div>
+    </ion-item>
+  </ion-list>
+</div>
 </ion-content>
+<ion-footer ion-fixed>    
+  <ion-toolbar class="no-border" color="white">        
+    <ion-input [(ngModel)]="newmessage" placeholder="Write your message ..."></ion-input>  
+    <ion-buttons end>
+      <button ion-button (click)="addgroupmsg()">
+        <ion-icon name="send" color="primary"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-toolbar>    
+</ion-footer>
